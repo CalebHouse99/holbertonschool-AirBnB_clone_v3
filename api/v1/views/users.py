@@ -6,7 +6,7 @@ from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 
 
-@app_views.route("/users/", methods=["GET"],
+@app_views.route("/users", methods=["GET"],
                  strict_slashes=False)
 def get_users():
     """retrieves list of user objects"""
@@ -17,7 +17,7 @@ def get_users():
     return jsonify(list_users)
 
 
-@app_views.route("/users/<string:user_id>", methods=["GET"],
+@app_views.route("/users/<user_id>", methods=["GET"],
                  strict_slashes=False)
 def get_user_id(user_id):
     """retrieves specific user id"""
@@ -27,7 +27,7 @@ def get_user_id(user_id):
     abort(404)
 
 
-@app_views.route("/users/<string:user_id>", methods=["DELETE"],
+@app_views.route("/users/<user_id>", methods=["DELETE"],
                  strict_slashes=False)
 def delete_user_id(user_id):
     """deletes user id object"""
@@ -39,7 +39,7 @@ def delete_user_id(user_id):
     return make_response(jsonify({}), 200)
 
 
-@app_views.route("/users/", methods=["POST"],
+@app_views.route("/users", methods=["POST"],
                  strict_slashes=False)
 def post_user():
     """creates user object"""
@@ -54,7 +54,7 @@ def post_user():
     return make_response(jsonify(new_user.to_dict()), 201)
 
 
-@app_views.route("/user/<string:user_id>", methods=["PUT"],
+@app_views.route("/user/<user_id>", methods=["PUT"],
                  strict_slashes=False)
 def put_user(user_id):
     """updates user object"""
