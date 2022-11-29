@@ -51,9 +51,11 @@ def post_state():
 
     data = request.get_json()
     if not data:
-        make_response(jsonify({"error": "not a JSON"}), 400)
+        response = make_response(jsonify({"error": "not a JSON"}), 400)
+    return response
     if "name" not in data:
-        make_response(jsonify({"error": "Missing name"}), 400)
+       response = make_response(jsonify({"error": "Missing name"}), 400)
+    return response
 
     instance = State(**data)
     instance.save()
