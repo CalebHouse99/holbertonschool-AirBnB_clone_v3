@@ -18,7 +18,7 @@ def get_amenities():
 
 @app_views.route('/amenities/<amenity_id>', methods=['GET'],
                  strict_slashes=False)
-def get_amenity():
+def get_amenity(amenity_id):
     """retrieves specific amenity"""
     amenity = storage.get(Amenity, amenity_id)
     if not amenity:
@@ -28,7 +28,7 @@ def get_amenity():
 
 @app_views.route('/amenities/<amenity_id>', methods=['DELETE'],
                  strict_slashes=False)
-def delete_amenity():
+def delete_amenity(amenity_id):
     """deletes amenity object"""
     amenity = storage.get(Amenity, amenity_id)
 
@@ -46,7 +46,7 @@ def delete_amenity():
 def post_amenity():
     """creates amenity object"""
     if not request.get_json():
-        abort(400, descritpion="Not a JSON")
+        abort(400, description="Not a JSON")
 
     if 'name' not in request.get_json():
         abort(400, description="Missing name")
