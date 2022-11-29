@@ -67,7 +67,7 @@ def put_amenity(amenity_id):
         abort(404)
 
     if not request.get_json():
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
+        abort(400, description="Not a JSON")
 
     ignore = ['id', 'created_at', 'updated_at']
 
