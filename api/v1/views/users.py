@@ -66,12 +66,16 @@ def post_user():
 def put_user(user_id):
     """updates user object"""
     user = storage.get(User, user_id)
-    if user is None:
+    if not user:
         abort(404)
-    if request.get_json() is not None:
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
+
+    if not request.get_json():
+        abort(400, description="Not a JSON")
+
     ignore_keys = ["id", "email", "created_at", "updated_at"]
-    for key, value in request.get_json().items():
+    
+    data = request.get_json()
+    for key, value in data.items():
         if key not in ignore_keys:
             setattr(user, key, value)
     storage.save()
