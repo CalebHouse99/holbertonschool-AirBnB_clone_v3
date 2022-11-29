@@ -47,15 +47,18 @@ def delete_user_id(user_id):
                  strict_slashes=False)
 def post_user():
     """creates user object"""
-    if request.get_json() is not None:
-        return make_response(jsonify({"error": "Not a JSON"}), 400)
+    if not request.get_json():
+        abort(400, description="Not a JSON")
+
     if 'email' not in request.get_json():
-        return make_response(jsonify({"error": "Missing email"}), 400)
+        abort(400, description="Missing email")
     if 'password' not in request.get_json():
-        return make_response(jsonify({"error": "Missing password"}), 400)
-    new_user = User(**request.get_json())
-    new_user.save()
-    return make_response(jsonify(new_user.to_dict()), 201)
+        abort(400, description="Missing password")
+
+    data = request.get_json()
+    instance = User(**data)
+    instance.save()
+    return make_response(jsonify(instance.to_dict()), 201)
 
 
 @app_views.route("/user/<user_id>", methods=["PUT"],
