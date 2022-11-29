@@ -12,7 +12,7 @@ def get_users():
     """retrieves list of user objects"""
     all_users = storage.all(User)
     list_users = []
-    for user in all_users.values():
+    for user in all_users:
         list_users.append(user.to_dict())
     return jsonify(list_users)
 
@@ -22,9 +22,10 @@ def get_users():
 def get_user_id(user_id):
     """retrieves specific user id"""
     user = storage.get(User, user_id)
-    if user is not None:
-        return jsonify(user.to_dict())
-    abort(404)
+    if not user:
+        abort(404)
+
+    return jsonify(user.to_dict())
 
 
 @app_views.route("/users/<user_id>", methods=["DELETE"],
