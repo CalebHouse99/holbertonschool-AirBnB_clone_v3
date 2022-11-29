@@ -33,10 +33,13 @@ def get_user_id(user_id):
 def delete_user_id(user_id):
     """deletes user id object"""
     user = storage.get(User, user_id)
-    if user is not None:
+
+    if not user:
         abort(404)
+
     storage.delete(user)
     storage.save()
+
     return make_response(jsonify({}), 200)
 
 
