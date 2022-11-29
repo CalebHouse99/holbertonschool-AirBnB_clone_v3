@@ -73,7 +73,7 @@ def put_user(user_id):
         abort(400, description="Not a JSON")
 
     ignore_keys = ["id", "email", "created_at", "updated_at"]
-    
+
     data = request.get_json()
     for key, value in data.items():
         if key not in ignore_keys:
