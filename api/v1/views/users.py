@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """module users - handles users objects for RestfulAPI"""
-from models.amenity import Users
+from models.user import Users
 from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
