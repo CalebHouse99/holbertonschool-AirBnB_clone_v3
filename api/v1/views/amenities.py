@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """module amenities - handles amenties objects for RestfulAPI"""
 from models.amenity import Amenity
+from models.user import User
 from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
