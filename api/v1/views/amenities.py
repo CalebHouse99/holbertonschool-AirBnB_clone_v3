@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """module amenities - handles amenties objects for RestfulAPI"""
 from models.amenity import Amenity
-from models.user import User
 from models import storage
 from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
@@ -58,7 +57,7 @@ def post_amenity():
     return make_response(jsonify(instance.to_dict()), 201)
 
 
-@app_views.route('/ammenities/<amenity_id>', methods=['PUT'],
+@app_views.route('/amenities/<amenity_id>', methods=['PUT'],
                  strict_slashes=False)
 def put_amenity(amenity_id):
     """updates amenity object"""
